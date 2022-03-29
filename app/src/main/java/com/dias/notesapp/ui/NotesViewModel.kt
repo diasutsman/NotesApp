@@ -17,10 +17,29 @@ class NotesViewModel(application: Application): AndroidViewModel(application) {
 
     fun getAllData(): LiveData<List<Notes>> = repository.getAllData()
 
-    // fungsi ini akan digunakan untuk mengirim data ke repository
+    fun sortByHighPriority() : LiveData<List<Notes>> = repository.sortByHighPriority()
+
+    fun sortByLowPriority() : LiveData<List<Notes>> = repository.sortByLowPriority()
+
+    fun deleteAllData() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAllData()
+        }
+    }
+
     fun insertData(notes: Notes) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertNotes(notes)
+        }
+    }
+
+    // search by query
+    fun searchByQuery(query: String) : LiveData<List<Notes>> = repository.searchByQuery(query)
+
+    // delete note
+    fun deleteNote(notes: Notes) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteNotes(notes)
         }
     }
 }

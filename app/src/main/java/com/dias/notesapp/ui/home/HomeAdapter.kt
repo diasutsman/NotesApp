@@ -1,8 +1,13 @@
 package com.dias.notesapp.ui.home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginBottom
+import androidx.core.view.marginEnd
+import androidx.core.view.marginStart
+import androidx.core.view.marginTop
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dias.notesapp.R
@@ -12,7 +17,9 @@ import com.dias.notesapp.databinding.RowItemNotesBinding
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.MyViewHolder>() {
 
-    private var listNotes = arrayListOf<Notes>()
+    private var _listNotes = arrayListOf<Notes>()
+    val listNotes: List<Notes>
+        get() = _listNotes
 
     class MyViewHolder(val binding: RowItemNotesBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -21,7 +28,14 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.MyViewHolder>() {
     )
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val data = listNotes[position]
+
+        val data = _listNotes[position]
+        holder.binding.root.apply {
+            Log.i("HomeAdapter", "Margin top: $marginTop")
+            Log.i("HomeAdapter", "Margin end: $marginEnd")
+            Log.i("HomeAdapter", "Margin bottom: $marginBottom")
+            Log.i("HomeAdapter", "Margin start: $marginStart")
+        }
         holder.binding.apply {
             tvTitle.text = data.title
             tvDate.text = data.date
@@ -40,13 +54,13 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.MyViewHolder>() {
 
     fun setData(list: List<Notes>?) {
         if (list == null) return
-        val diffCallback = DiffCallback(listNotes, list)
+        val diffCallback = DiffCallback(_listNotes, list)
         val diffCallbackResult = DiffUtil.calculateDiff(diffCallback)
-        listNotes.clear()
-        listNotes.addAll(list)
+        _listNotes.clear()
+        _listNotes.addAll(list)
         diffCallbackResult.dispatchUpdatesTo(this)
     }
 
-    override fun getItemCount() = listNotes.size
+    override fun getItemCount() = _listNotes.size
 
 }
