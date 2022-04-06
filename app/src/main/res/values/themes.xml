@@ -28,12 +28,16 @@
     <style name="FabRectangleRadius" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerSize">20%</item>
     </style>
-
     <style name="ActionBarStyle" parent="android:Widget.ActionBar">
         <item name="android:background">@color/white</item>
     </style>
     <style name="Theme.NotesApp.NoActionBar" parent="Theme.NotesApp">
         <item name="windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
+    </style>
+
+    <style name="Theme.NotesApp.SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">>
+        <item name="android:statusBarColor">@color/white</item>
+<!--        <item name="android:windowBackground">@drawable/splash_image</item>-->
     </style>
 </resources>

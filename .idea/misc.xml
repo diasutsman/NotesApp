@@ -5,22 +5,27 @@
       <map>
         <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/bg_dark_gray_fab.xml" value="0.125" />
         <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/bg_light_gray_radius.xml" value="0.108" />
+        <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/bg_splash_screen.xml" value="0.1315" />
         <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/custom_input.xml" value="0.108" />
         <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/ic_add.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/ic_delete.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/ic_edit.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/ic_left_arrow.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/ic_logo.xml" value="0.1315" />
+        <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/splash_image.xml" value="0.105" />
         <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/layout/activity_main.xml" value="0.14407866609662248" />
+        <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.14407866609662248" />
         <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/layout/fragment_add.xml" value="0.14407866609662248" />
         <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/layout/fragment_detail.xml" value="0.14407866609662248" />
         <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/layout/fragment_home.xml" value="0.16666666666666666" />
-        <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/layout/fragment_update.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/layout/fragment_update.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/layout/layout_menu_save.xml" value="0.14407866609662248" />
         <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/layout/row_item_notes.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/menu/menu_detail.xml" value="0.13125267208208635" />
         <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/menu/menu_home.xml" value="0.14407866609662248" />
         <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/menu/menu_save.xml" value="0.14666666666666667" />
         <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/menu/menu_update.xml" value="0.14407866609662248" />
+        <entry key="..\:/AndroidStudioProjects/NotesApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.103" />
       </map>
     </option>
   </component>

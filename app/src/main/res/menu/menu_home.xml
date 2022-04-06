@@ -13,7 +13,7 @@
         android:title="@string/txt_sort"
         app:showAsAction="ifRoom">
         <menu>
-            <group android:checkableBehavior="single">
+            <group>
                 <item android:title="@string/txt_sort">
                     <menu>
                         <item

@@ -15,6 +15,7 @@ import com.dias.notesapp.databinding.FragmentAddBinding
 import com.dias.notesapp.ui.NotesViewModel
 import com.dias.notesapp.utils.ExtensionFunctions.setActionBar
 import com.dias.notesapp.utils.HelperFunctions
+import com.dias.notesapp.utils.HelperFunctions.parseToPriority
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -78,8 +79,6 @@ class AddFragment : Fragment() {
             }
         }
     }
-
-    private fun parseToPriority(priority: String): Priority = Priority.valueOf(priority.uppercase(Locale.getDefault()))
 
     override fun onDestroy() {
         super.onDestroy()

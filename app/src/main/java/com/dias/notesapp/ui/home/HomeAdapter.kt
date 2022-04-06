@@ -8,6 +8,7 @@ import androidx.core.view.marginBottom
 import androidx.core.view.marginEnd
 import androidx.core.view.marginStart
 import androidx.core.view.marginTop
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dias.notesapp.R
@@ -37,18 +38,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.MyViewHolder>() {
             Log.i("HomeAdapter", "Margin start: $marginStart")
         }
         holder.binding.apply {
-            tvTitle.text = data.title
-            tvDate.text = data.date
-            tvDescription.text = data.description
-            val pink = ContextCompat.getColor(priorityIndicator.context,
-                R.color.pink)
-            when(data.priority) {
-                Priority.HIGH -> priorityIndicator.setCardBackgroundColor(pink)
-                Priority.MEDIUM -> priorityIndicator.setCardBackgroundColor(ContextCompat.getColor(priorityIndicator.context,
-                    R.color.yellow))
-                Priority.LOW -> priorityIndicator.setCardBackgroundColor(ContextCompat.getColor(priorityIndicator.context,
-                    R.color.green))
-            }
+            mNotes = data
         }
     }
 

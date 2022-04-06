@@ -22,4 +22,6 @@ class NotesRepository(private val notesDao: NotesDao) {
     fun searchByQuery(query: String) : LiveData<List<Notes>> = notesDao.searchByQuery(query)
 
     suspend fun deleteNotes(notes: Notes) = notesDao.deleteNotes(notes)
+
+    suspend fun updateNotes(notes: Notes) = notesDao.updateNotes(notes)
 }

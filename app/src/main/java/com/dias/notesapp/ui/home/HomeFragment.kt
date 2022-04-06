@@ -6,6 +6,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -17,6 +18,9 @@ import com.dias.notesapp.data.entity.Notes
 import com.dias.notesapp.databinding.FragmentHomeBinding
 import com.dias.notesapp.ui.NotesViewModel
 import com.dias.notesapp.utils.ExtensionFunctions.setActionBar
+import com.dias.notesapp.utils.HelperFunctions
+import com.dias.notesapp.utils.HelperFunctions.checkIfDataEmpty
+import com.google.android.material.snackbar.Snackbar
 
 class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
 
@@ -42,6 +46,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
+            mHelperFunction = HelperFunctions
             toolbarHome.setActionBar(this@HomeFragment)
             // when fab add clicked, it navigate to addFragment
             fabAdd.setOnClickListener {
@@ -55,21 +60,13 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun setupRecyclerView() {
         binding.rvNotes.apply {
             homeViewModel.getAllData().observe(viewLifecycleOwner) {
-                checkIsDataEmpty(it)
+                checkIfDataEmpty(it)
                 homeAdapter.setData(it)
                 _currentData = it
             }
             adapter = homeAdapter
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             swipeToDelete(this)
-        }
-    }
-
-    private fun checkIsDataEmpty(list: List<Notes>?) {
-        if (list == null) return
-        binding.apply {
-            imgNoData.visibility = if (list.isEmpty()) View.VISIBLE else View.INVISIBLE
-            rvNotes.visibility = if (list.isNotEmpty()) View.VISIBLE else View.INVISIBLE
         }
     }
 
@@ -85,12 +82,12 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_priority_high -> homeViewModel.sortByHighPriority()
-                .observe(this) { highSortedList ->
-                    homeAdapter.setData(highSortedList)
+                .observe(viewLifecycleOwner) {
+                    homeAdapter.setData(it)
                 }
             R.id.menu_priority_low -> homeViewModel.sortByLowPriority()
-                .observe(this) { lowSortedList ->
-                    homeAdapter.setData(lowSortedList)
+                .observe(viewLifecycleOwner) {
+                    homeAdapter.setData(it)
                 }
             R.id.menu_delete_all -> confirmDeleteAll()
         }
@@ -116,11 +113,6 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
             .show()
     }
 
-    // prevent memory leak when fragment destroyed
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         // apit query dengan %query% dan masukkan ke variable querySearch
@@ -135,7 +127,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         return true
     }
 
-    fun swipeToDelete(recyclerView: RecyclerView) {
+    private fun swipeToDelete(recyclerView: RecyclerView) {
         val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
             0,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
@@ -153,10 +145,19 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
                 val note = homeAdapter.listNotes[position]
 
                 homeViewModel.deleteNote(note)
-
+                restoreDeletedData(viewHolder.itemView, note)
             }
         })
         itemTouchHelper.attachToRecyclerView(recyclerView)
+    }
+
+    private fun restoreDeletedData(itemView: View, note: Notes) {
+        Snackbar.make(itemView, "Deleted: ${note.title}", Snackbar.LENGTH_LONG)
+            .setAction("Undo") {
+                homeViewModel.insertData(note)
+            }
+            .setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
+            .show()
     }
 
 
@@ -173,4 +174,9 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         return true
     }
 
+    // prevent memory leak when fragment destroyed
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
